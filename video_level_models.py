@@ -130,27 +130,27 @@ class CnnModel(models.BaseModel):
     print(input_layer)
     print('------------')
 
-    # Convolutional Layer #1
-    conv1 = tf.layers.conv2d(
-      inputs=input_layer,
-      filters=32,
-      kernel_size=[128, 1],
-      padding="same",
-      activation=tf.nn.relu)
+    # # Convolutional Layer #1
+    # conv1 = tf.layers.conv2d(
+    #   inputs=input_layer,
+    #   filters=32,
+    #   kernel_size=[128, 1],
+    #   padding="same",
+    #   activation=tf.nn.relu)
 
-    print('------------')
-    print('conv1')
-    print(conv1)
-    print('------------')
+    # print('------------')
+    # print('conv1')
+    # print(conv1)
+    # print('------------')
 
-    # Pooling Layer #1
-    pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[2, 2], strides=4)
+    # # Pooling Layer #1
+    # pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[2, 2], strides=4)
 
 
-    print('------------')
-    print('pool1')
-    print(pool1)
-    print('------------')
+    # print('------------')
+    # print('pool1')
+    # print(pool1)
+    # print('------------')
 
     # # Dense Layer
     # pool2_flat = tf.reshape(pool2, [-1, 7 * 7 * 64])
