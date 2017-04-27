@@ -130,13 +130,13 @@ class CnnModel(models.BaseModel):
     print(input_layer)
     print('------------')
 
-    # # Convolutional Layer #1
-    # conv1 = tf.layers.conv2d(
-    #   inputs=input_layer,
-    #   filters=32,
-    #   kernel_size=[128, 1],
-    #   padding="same",
-    #   activation=tf.nn.relu)
+    # Convolutional Layer #1
+    conv1 = tf.layers.conv2d(
+      inputs=input_layer,
+      filters=32,
+      kernel_size=[128, 1],
+      padding="same",
+      activation=tf.nn.relu)
 
     # print('------------')
     # print('conv1')
