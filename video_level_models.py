@@ -138,10 +138,10 @@ class CnnModel(models.BaseModel):
       padding="same",
       activation=tf.nn.relu)
 
-    # print('------------')
-    # print('conv1')
-    # print(conv1)
-    # print('------------')
+    print('------------')
+    print('conv1')
+    print(conv1)
+    print('------------')
 
     # # Pooling Layer #1
     # pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[2, 2], strides=4)
