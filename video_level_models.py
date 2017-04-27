@@ -144,14 +144,14 @@ class CnnModel(models.BaseModel):
     print('------------')
 
     # Pooling Layer #1
-    pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[2, 1], strides=2)
+    pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[4, 1], strides=2)
 
 
     print('------------')
     print('pool1')
     print(pool1)
     print('------------')
-    
+
     # # Dense Layer
     # pool2_flat = tf.reshape(pool2, [-1, 7 * 7 * 64])
     # dense = tf.layers.dense(inputs=pool2_flat, units=1024, activation=tf.nn.relu)
