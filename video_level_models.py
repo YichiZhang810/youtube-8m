@@ -144,7 +144,7 @@ class CnnModel(models.BaseModel):
     print('------------')
 
     # Pooling Layer #1
-    pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[4, 1], strides=2)
+    pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[2, 2], strides=4)
 
 
     print('------------')
