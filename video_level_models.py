@@ -147,4 +147,11 @@ class RnnModel(models.BaseModel):
     print(outputs)
     print('-----------------')    
 
+    outputs = tf.reduce_sum(outputs, 1)
+
+    print('-----------------')
+    print('outputs')
+    print(outputs)
+    print('-----------------') 
+
     return {"predictions": outputs}
