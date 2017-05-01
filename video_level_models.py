@@ -104,7 +104,7 @@ class MoeModel(models.BaseModel):
 
 class RnnModel(models.BaseModel):
 
-  def create_model(self, model_input, vocab_size, **unused_params):
+  def create_model(self, model_input, vocab_size, l2_penalty=1e-8, **unused_params):
     """Creates a model which uses a stack of LSTMs to represent the video.
 
     Args:
