@@ -223,6 +223,12 @@ class LstmModel(models.BaseModel):
 
     loss = 0.0
 
+    print('-----------------')
+    print('model_input')
+    print(model_input)
+    print('-----------------')
+
+
     outputs, state = tf.nn.dynamic_rnn(stacked_lstm, model_input,
                                        sequence_length=num_frames,
                                        dtype=tf.float32)
