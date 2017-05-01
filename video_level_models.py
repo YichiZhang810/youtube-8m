@@ -142,4 +142,9 @@ class RnnModel(models.BaseModel):
                                        sequence_length=tf.ones([1]),
                                        dtype=tf.float32)
 
+    print('-----------------')
+    print('outputs')
+    print(outputs)
+    print('-----------------')    
+
     return {"predictions": outputs}

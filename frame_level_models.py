@@ -233,6 +233,11 @@ class LstmModel(models.BaseModel):
                                        sequence_length=num_frames,
                                        dtype=tf.float32)
 
+    print('-----------------')
+    print('outputs')
+    print(outputs)
+    print('-----------------')    
+
     aggregated_model = getattr(video_level_models,
                                FLAGS.video_level_classifier_model)
 
