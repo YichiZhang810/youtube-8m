@@ -129,16 +129,48 @@ class RnnModel(models.BaseModel):
 
     loss = 0.0
 
+    print('--------')
+    print('model_input')
+    print(model_input)
+    print('--------')
+
+
     model_input = tf.expand_dims(model_input,axis=1)
+
+    print('--------')
+    print('model_input')
+    print(model_input)
+    print('--------')
 
     outputs, state = tf.nn.dynamic_rnn(stacked_lstm, model_input,
                                        sequence_length=tf.ones([1]),
                                        dtype=tf.float32)
 
+    print('--------')
+    print('outputs')
+    print(outputs)
+    print('--------')
+
+    print('--------')
+    print('state[-1].h')
+    print(state[-1].h)
+    print('--------')
+
     outputs = tf.reduce_sum(outputs, 1)
+
+    print('--------')
+    print('outputs')
+    print(outputs)
+    print('--------')
+
 
     output = slim.fully_connected(
     outputs, vocab_size, activation_fn=tf.nn.sigmoid,
     weights_regularizer=slim.l2_regularizer(l2_penalty))
+
+    print('--------')
+    print('output')
+    print(output)
+    print('--------')
 
     return {"predictions": output}
