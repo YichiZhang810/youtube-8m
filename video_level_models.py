@@ -101,3 +101,45 @@ class MoeModel(models.BaseModel):
     final_probabilities = tf.reshape(final_probabilities_by_class_and_batch,
                                      [-1, vocab_size])
     return {"predictions": final_probabilities}
+
+class RnnModel(models.BaseModel):
+
+  def create_model(self, model_input, vocab_size, **unused_params):
+    """Creates a model which uses a stack of LSTMs to represent the video.
+
+    Args:
+      model_input: A 'batch_size' x 'max_frames' x 'num_features' matrix of
+                   input features.
+      vocab_size: The number of classes in the dataset.
+
+    Returns:
+      A dictionary with a tensor containing the probability predictions of the
+      model in the 'predictions' key. The dimensions of the tensor are
+      'batch_size' x 'num_classes'.
+    """
+    lstm_size = 1024
+    number_of_layers = 2
+
+    stacked_lstm = tf.contrib.rnn.MultiRNNCell(
+            [
+                tf.contrib.rnn.BasicLSTMCell(
+                    lstm_size, forget_bias=1.0)
+                for _ in range(number_of_layers)
+                ])
+
+    loss = 0.0
+
+    model_input = tf.expand_dims(model_input,axis=1)
+
+    print('-----------------')
+    print('model_input')
+    print(model_input)
+    print('-----------------')
+
+
+
+    outputs, state = tf.nn.dynamic_rnn(stacked_lstm, model_input,
+                                       sequence_length=tf.ones([1]),
+                                       dtype=tf.float32)
+
+    return {"predictions": outputs}
