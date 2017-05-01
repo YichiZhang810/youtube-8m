@@ -131,10 +131,10 @@ class RnnModel(models.BaseModel):
 
     model_input = tf.expand_dims(model_input,axis=1)
 
-    print('-----------------')
-    print('model_input')
-    print(model_input)
-    print('-----------------')
+    # print('-----------------')
+    # print('model_input')
+    # print(model_input)
+    # print('-----------------')
 
 
 
@@ -142,16 +142,20 @@ class RnnModel(models.BaseModel):
                                        sequence_length=tf.ones([1]),
                                        dtype=tf.float32)
 
-    print('-----------------')
-    print('outputs')
-    print(outputs)
-    print('-----------------')    
+    # print('-----------------')
+    # print('outputs')
+    # print(outputs)
+    # print('-----------------')    
 
     outputs = tf.reduce_sum(outputs, 1)
 
-    print('-----------------')
-    print('outputs')
-    print(outputs)
-    print('-----------------') 
+    # print('-----------------')
+    # print('outputs')
+    # print(outputs)
+    # print('-----------------') 
 
-    return {"predictions": outputs}
+    output = slim.fully_connected(
+    outputs, vocab_size, activation_fn=tf.nn.sigmoid,
+    weights_regularizer=slim.l2_regularizer(l2_penalty))
+
+    return {"predictions": output}
