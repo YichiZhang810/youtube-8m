@@ -165,7 +165,7 @@ class RnnModel(models.BaseModel):
 
 
     output = slim.fully_connected(
-    outputs, vocab_size, activation_fn=tf.nn.sigmoid,
+    state[-1].h, vocab_size, activation_fn=tf.nn.sigmoid,
     weights_regularizer=slim.l2_regularizer(l2_penalty))
 
     print('--------')
