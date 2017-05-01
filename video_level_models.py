@@ -131,7 +131,7 @@ class ComplexMoeModel(models.BaseModel):
     return {"predictions": final_probabilities}
 
 
-class LstmModel(models.BaseModel):
+class RnnModel(models.BaseModel):
 
   def create_model(self, model_input, vocab_size, num_frames, **unused_params):
     """Creates a model which uses a stack of LSTMs to represent the video.
