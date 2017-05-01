@@ -238,6 +238,11 @@ class LstmModel(models.BaseModel):
     print(outputs)
     print('-----------------')    
 
+    print('-----------------')
+    print('state[-1].h')
+    print(state[-1].h)
+    print('-----------------')
+
     aggregated_model = getattr(video_level_models,
                                FLAGS.video_level_classifier_model)
 
