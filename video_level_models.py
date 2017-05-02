@@ -184,12 +184,17 @@ class CnnModel(models.BaseModel):
     # Dense Layer
     pool2_flat = tf.reshape(pool2, [-1, 7 * 7 * 64])
     dense = tf.layers.dense(inputs=pool2_flat, units=1024, activation=tf.nn.relu)
-    # dropout = tf.layers.dropout(
-    #   inputs=dense, rate=0.4, training=mode == learn.ModeKeys.TRAIN)
+    dropout = tf.layers.dropout(
+      inputs=dense, rate=0.4)
 
-    # # Logits Layer
-    # logits = tf.layers.dense(inputs=dropout, units=10)
+    # Logits Layer
+    logits = tf.layers.dense(inputs=dropout, units=10)
 
+    print('------------')
+    print('logits')
+    print(logits)
+
+    print('------------')
 
 
     output = slim.fully_connected(
