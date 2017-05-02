@@ -159,6 +159,9 @@ class CnnModel(models.BaseModel):
       batch_size x num_classes."""
 
     # Input Layer
+
+
+
     input_layer = tf.reshape(model_input, [-1, 1024, 1, 1])
 
     # Convolutional Layer #1
@@ -188,7 +191,7 @@ class CnnModel(models.BaseModel):
       inputs=dense, rate=0.4)
 
     # Logits Layer
-    logits = tf.layers.dense(inputs=dropout, units=10)
+    logits = tf.layers.dense(inputs=dropout, units=4716)
 
     print('------------')
     print('logits')
@@ -200,6 +203,13 @@ class CnnModel(models.BaseModel):
     output = slim.fully_connected(
         model_input, vocab_size, activation_fn=tf.nn.sigmoid,
         weights_regularizer=slim.l2_regularizer(l2_penalty))
+
+    print('------------')
+    print('output')
+    print(output)
+
+    print('------------')
+
     return {"predictions": output}
 
 
