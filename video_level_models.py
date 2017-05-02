@@ -129,48 +129,50 @@ class RnnModel(models.BaseModel):
 
     loss = 0.0
 
-    print('--------')
-    print('model_input')
-    print(model_input)
-    print('--------')
-
-
     model_input = tf.expand_dims(model_input,axis=1)
-
-    print('--------')
-    print('model_input')
-    print(model_input)
-    print('--------')
 
     outputs, state = tf.nn.dynamic_rnn(stacked_lstm, model_input,
                                        sequence_length=tf.ones([1]),
                                        dtype=tf.float32)
 
-    print('--------')
-    print('outputs')
-    print(outputs)
-    print('--------')
-
-    print('--------')
-    print('state[-1].h')
-    print(state[-1].h)
-    print('--------')
-
     outputs = tf.reduce_sum(outputs, 1)
-
-    print('--------')
-    print('outputs')
-    print(outputs)
-    print('--------')
-
 
     output = slim.fully_connected(
     state[-1].h, vocab_size, activation_fn=tf.nn.sigmoid,
     weights_regularizer=slim.l2_regularizer(l2_penalty))
 
-    print('--------')
-    print('output')
-    print(output)
-    print('--------')
-
     return {"predictions": output}
+
+class CnnModel(models.BaseModel):
+  """Logistic model with L2 regularization."""
+
+  def create_model(self, model_input, vocab_size, l2_penalty=1e-8, **unused_params):
+    """Creates a logistic model.
+
+    Args:
+      model_input: 'batch' x 'num_features' matrix of input features.
+      vocab_size: The number of classes in the dataset.
+
+    Returns:
+      A dictionary with a tensor containing the probability predictions of the
+      model in the 'predictions' key. The dimensions of the tensor are
+      batch_size x num_classes."""
+
+    # Input Layer
+    input_layer = tf.reshape(model_input, [-1, 1024, 1, 1])
+
+    # Convolutional Layer #1
+    conv1 = tf.layers.conv2d(
+        inputs=input_layer,
+        filters=32,
+        kernel_size=[5, 5],
+        padding="same",
+        activation=tf.nn.relu)
+
+
+    output = slim.fully_connected(
+        model_input, vocab_size, activation_fn=tf.nn.sigmoid,
+        weights_regularizer=slim.l2_regularizer(l2_penalty))
+    return {"predictions": output}
+
+
